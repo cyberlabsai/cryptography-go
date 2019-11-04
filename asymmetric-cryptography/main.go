@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/sha256"
@@ -13,6 +14,7 @@ import (
 
 const (
 	rsaKeySize = 2048
+	hash       = crypto.SHA256
 )
 
 type keypair struct {
@@ -22,6 +24,7 @@ type keypair struct {
 
 var kp keypair
 var ciphertext, signedMessage []byte
+var msgHashed [32]byte
 var rng io.Reader
 
 func generateKeypair() error {
@@ -68,24 +71,27 @@ func decrypt() {
 func sign() {
 	var err error
 	message := []byte("criptofryday2 is the best hacker event in Florianópolis")
-	signedMessage, err = rsa.EncryptPKCS1v15(rng, kp.pub, message)
+
+	msgHashed = sha256.Sum256(message)
+
+	signedMessage, err = rsa.SignPKCS1v15(rng, kp.priv, hash, msgHashed[:])
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error from encryption: %s\n", err)
+		fmt.Fprintf(os.Stderr, "Error from signing: %s\n", err)
 		return
 	}
+
 	fmt.Printf("Mensagem assinada: %x\n", signedMessage)
 }
 
 func verify() {
 
-	msgVerified, err := rsa.DecryptPKCS1v15(rng, kp.priv, signedMessage)
+	err := rsa.VerifyPKCS1v15(kp.pub, hash, msgHashed[:], signedMessage)
 
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error from decryption: %s\n", err)
-		return
 	}
 
-	fmt.Printf("Mensagem Verificada: %s\n", string(msgVerified))
+	fmt.Printf("Mensagem Verificada!\n")
 }
 
 func main() {
