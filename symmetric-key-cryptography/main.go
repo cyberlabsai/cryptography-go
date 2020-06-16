@@ -11,12 +11,10 @@ import (
 // algorithm designed to provide both data authenticity (integrity) as well as
 // confidentiality.
 
-// Merged into Golang in https://go-review.googlesource.com/#/c/18803/
-
 func encrypt() {
 	// The key argument should be the AES key, either 16 or 32 bytes
 	// to select AES-128 or AES-256.
-	key := []byte("CryptoFriday--II")
+	key := []byte("HackweekTheBest!")
 	plaintext := []byte("Este é o texto plano a ser cifrado")
 
 	block, err := aes.NewCipher(key)
@@ -25,7 +23,7 @@ func encrypt() {
 	}
 
 	// Never use more than 2^32 random nonces with a given key because of the risk of a repeat.
-	nonce := []byte("CryptoFriday")
+	nonce := []byte("Hackweek!!!!")
 
 	aesgcm, err := cipher.NewGCM(block)
 	if err != nil {
@@ -39,10 +37,10 @@ func encrypt() {
 func decrypt() {
 	// The key argument should be the AES key, either 16 or 32 bytes
 	// to select AES-128 or AES-256.
-	key := []byte("CryptoFriday--II")
-	ciphertext, _ := hex.DecodeString("e3e9af1617fc6704868e08be6db61eeeb70626321aeb117d470d6db112ce674a584e71f542ba01ecefe3a39c53948b123cc49c")
+	key := []byte("HackweekTheBest!")
+	ciphertext, _ := hex.DecodeString("b5b80251d90d055f8cc2de7cbdeeb4237f5956981c8132fe6602541450cbbdfad7626c2767b41ddfe3852d909fe3d338484708")
 
-	nonce := []byte("CryptoFriday")
+	nonce := []byte("Hackweek!!!!")
 
 	block, err := aes.NewCipher(key)
 	if err != nil {

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/hmac"
 	"crypto/md5"
 	"crypto/sha1"
 	"crypto/sha256"
@@ -11,15 +12,27 @@ import (
 
 func main() {
 
-	// cryptographic hash
-	s := "Cryptofriday 2 é o melhor evento hacker de Floripa!"
+	// message to be hashed
+	msg := "Hackweek é o melhor evento da PANDEMIA!"
 
-	md5 := md5.Sum([]byte(s))
-	sha1 := sha1.Sum([]byte(s))
-	sha256 := sha256.Sum256([]byte(s))
+	// MD5 - https://en.wikipedia.org/wiki/MD5
+	md5 := md5.Sum([]byte(msg))
 
+	// SHA1 - https://en.wikipedia.org/wiki/SHA-1
+	sha1 := sha1.Sum([]byte(msg))
+
+	// SHA2 - https://en.wikipedia.org/wiki/SHA-2 (most used nowadays)
+	sha2 := sha256.Sum256([]byte(msg))
+
+	// HMAC - https://pt.wikipedia.org/wiki/HMAC
+	key := []byte("HACKWEEK")
+	mac := hmac.New(sha256.New, key)
+	mac.Write([]byte(msg))
+
+	// Print all hashes
 	fmt.Printf("MD5: %x\n", md5)
 	fmt.Printf("SHA1: %x\n", sha1)
-	fmt.Printf("SHA2-256: %x\n", sha256)
+	fmt.Printf("SHA2-256: %x\n", sha2)
+	fmt.Printf("HMAC: %x\n", mac.Sum(nil))
 
 }

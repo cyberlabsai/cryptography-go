@@ -41,7 +41,7 @@ func encrypt() {
 
 	var err error
 
-	secretMessage := []byte("criptofryday2 is the best hacker event in Florianópolis")
+	secretMessage := []byte("Hackweek é o melhor evento dessa pandemia!")
 	label := []byte("talk")
 
 	ciphertext, err = rsa.EncryptOAEP(sha256.New(), rng, kp.pub, secretMessage, label)
@@ -70,7 +70,7 @@ func decrypt() {
 
 func sign() {
 	var err error
-	message := []byte("criptofryday2 is the best hacker event in Florianópolis")
+	message := []byte("Hackweek é o melhor evento dessa pandemia!")
 
 	msgHashed = sha256.Sum256(message)
 

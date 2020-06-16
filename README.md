@@ -1,6 +1,6 @@
 # Encrypt, Decrypt and Sign data in Go
 
-This is the source code of a talk presented in [Cryptofriday 2](https://www.meetup.com/CryptoFriday/events/265414670/) event in Florianópolis.
+This is the source code of a talk presented in [Hackweek](https://www.sympla.com.br/hackweek__872352) online event.
 
 The source code has the follow structure:
 
