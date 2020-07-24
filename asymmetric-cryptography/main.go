@@ -41,7 +41,7 @@ func encrypt() {
 
 	var err error
 
-	secretMessage := []byte("Hackweek é o melhor evento dessa pandemia!")
+	secretMessage := []byte("Esta é a palestra de criptografia da Cyberlabs")
 	label := []byte("talk")
 
 	ciphertext, err = rsa.EncryptOAEP(sha256.New(), rng, kp.pub, secretMessage, label)
@@ -49,6 +49,8 @@ func encrypt() {
 		fmt.Fprintf(os.Stderr, "Error from encryption: %s\n", err)
 		return
 	}
+
+	fmt.Println(" ")
 
 	// Since encryption is a randomized function, ciphertext will be
 	// different each time.
@@ -65,12 +67,14 @@ func decrypt() {
 		return
 	}
 
+	fmt.Println(" ")
+
 	fmt.Printf("Plaintext: %s\n", string(plaintext))
 }
 
 func sign() {
 	var err error
-	message := []byte("Hackweek é o melhor evento dessa pandemia!")
+	message := []byte("Esta é a palestra de criptografia da Cyberlabs")
 
 	msgHashed = sha256.Sum256(message)
 
@@ -79,6 +83,8 @@ func sign() {
 		fmt.Fprintf(os.Stderr, "Error from signing: %s\n", err)
 		return
 	}
+
+	fmt.Println(" ")
 
 	fmt.Printf("Mensagem assinada: %x\n", signedMessage)
 }
@@ -91,6 +97,8 @@ func verify() {
 		fmt.Fprintf(os.Stderr, "Error from decryption: %s\n", err)
 	}
 
+	fmt.Println(" ")
+
 	fmt.Printf("Mensagem Verificada!\n")
 }
 
@@ -102,6 +110,8 @@ func main() {
 
 	// gerar par de chaves
 	generateKeypair()
+
+	fmt.Println("Criptografia de CHAVE PÚBLICA ou ASSIMÉTRICA")
 
 	// cifrar texto
 	encrypt()
