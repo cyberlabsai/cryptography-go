@@ -1,6 +1,6 @@
 # Encrypt, Decrypt and Sign data in Go
 
-This is the source code of a talk presented in Cybertalks talk.
+This is the source code of a talk about cryptography presented at Cybertalks.
 
 The source code has the follow structure:
 
