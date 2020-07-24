@@ -10,4 +10,4 @@ The source code has the follow structure:
 
 The slides of the talk are in this link below:
 
-[https://docs.google.com/presentation/d/](https://docs.google.com/presentation/d/)
+[https://drive.google.com/file/d/1LYnw-XCpOPPKeieTEmBx0m6vDevKC_Hf/view?usp=sharing](https://drive.google.com/file/d/1LYnw-XCpOPPKeieTEmBx0m6vDevKC_Hf/view?usp=sharing)
